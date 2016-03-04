@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:remove="tag" th:fragment="commonhead">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="resources/lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="resources/lib/css/datatables.min.css"/>
+    <link rel="stylesheet" href="resources/lib/css/select2.min.css"/>
+    <link rel="stylesheet" href="resources/lib/css/select2-bootstrap.min.css"/>
+    <link rel="stylesheet" href="resources/app/css/bookstore-common.css"/>
+  </head>
+  <body>
+    <nav th:fragment="header" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./" th:text="#{book.store}">Book Store</a>
+        </div>
+        <form id="language-form" method="post" action="employeemanagement/updateLanguage">
+        	<input id="language-input" type="hidden" name="language" value=""/>
+        </form>
+        <nav class="navbar-collapse collapse">
+          <ul id="book-store-navbar" class="nav navbar-nav">
+            <li id="nav-home"><a href="./index" th:text="#{home}">Home</a></li>
+            <li id="nav-office"><a href="./officemanagement" th:text="#{office}" th:if="${session.roles.contains('ADMIN')}">Office</a></li>
+            <li id="nav-profile"><a href="./profilemanagement" th:text="#{profile}" th:if="${session.roles.contains('ADMIN')}">Profile</a></li>
+            <li id="nav-employee"><a href="./employeemanagement" th:text="#{employee}" th:if="${session.roles.contains('ADMIN')}">Employee</a></li>
+            <li id="nav-book"><a href="./bookmanagement" th:text="#{book}" th:if="${session.roles.contains('ADMIN') or session.roles.contains('EMPLOYEE')}">Book</a></li>
+            <li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="#{language}">Language<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a th:text="#{english}" onclick="$('#language-input').val('en');$('#language-form').submit();">English</a></li>
+	            <li><a th:text="#{japanese}" onclick="$('#language-input').val('ja');$('#language-form').submit();">Japanese</a></li>
+	          </ul>
+	        </li>
+            <li id="nav-logout"><a href="./logout" th:text="#{logout}">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </nav>
+  </body>
+</html>
